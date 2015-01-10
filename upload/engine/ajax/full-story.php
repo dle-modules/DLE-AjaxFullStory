@@ -9,7 +9,7 @@ twitter: https://twitter.com/pafnuty_name
 google+: http://gplus.to/pafnuty
 email:   pafnuty10@gmail.com
 -----------------------------------------------------------------------------
-Версия: 1.2 от 10.01.2015
+Версия: 1.2.1 от 10.01.2015
 =============================================================================
  */
 
@@ -192,7 +192,7 @@ if ($arConf['fields'] == 'all') {
 // Конфиг модуля
 $afsCfg = array(
 	'template' => !empty($_GET['template']) ? $_GET['template'] : 'ajax/fullstory',
-	'cachePrefix' => !empty($arConf['cachePrefix']) ? $arConf['cachePrefix'] '_' . (int) $_GET['newsId'] : 'full_' . (int) $_GET['newsId'],
+	'cachePrefix' => !empty($arConf['cachePrefix']) ? $arConf['cachePrefix'] . '_' . (int) $_GET['newsId'] : 'full_' . (int) $_GET['newsId'],
 	'newsId' => ((int) $_GET['newsId'] > 0) ? (int) $_GET['newsId'] : '0',
 	'fields' => $queryFields,
 );
