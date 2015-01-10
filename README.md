@@ -17,7 +17,7 @@
 2. Залить содержимое папки **upload** в корень сайта.
 3. В нужном месте любого шаблона вставить 
 ``` html
-<span class="btn" data-fs-id="{news-id}">Быстрый просмотр</span>
+<span data-afs-id="{news-id}">Быстрый просмотр</span>
 ```
 где `{news-id}` -- ID новости (**обязательный параметр**)
 4. В js файл шаблона вставить:
@@ -84,5 +84,12 @@ $(document).on('click', '[data-afs-id]', function () {
     color: #F5F5F5;
 }
 ```
+
 ## Документация
-- в работе.
+- Документация по модулю находится на [этой странице](https://github.com/pafnuty/ajax-full-story-DLE/blob/master/DOCUMENTATION.md)
+
+## Контакты
+URL:     http://pafnuty.name/
+twitter: https://twitter.com/pafnuty_name
+google+: http://gplus.to/pafnuty
+email:   pafnuty10@gmail.com

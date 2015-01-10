@@ -9,7 +9,7 @@ twitter: https://twitter.com/pafnuty_name
 google+: http://gplus.to/pafnuty
 email:   pafnuty10@gmail.com
 -----------------------------------------------------------------------------
-Версия: 1.1 от 10.01.2015
+Версия: 1.2 от 10.01.2015
 =============================================================================
  */
 
@@ -117,7 +117,7 @@ if (!is_array($cat_info)) {
 $template_dir = ROOT_DIR . '/templates/' . $config['skin'];
 
 // Пытаемся получить даные из шаблона с настройками
-$presetFile = (!empty($_REQUEST['preset'])) ? $_REQUEST['preset'] : false;
+$presetFile = (!empty($_GET['preset'])) ? $_GET['preset'] : false;
 if ($presetFile) {
 	// Если название шаблона передано, то получаем из него конфиг
 	if (file_exists($template_dir . '/' . $presetFile . '.tpl')) {
@@ -190,25 +190,25 @@ if ($arConf['fields'] == 'all') {
 }
 
 // Конфиг модуля
-$fsCfg = array(
-	'template' => !empty($_REQUEST['template']) ? $_REQUEST['template'] : 'ajax/fullstory',
-	'cachePrefix' => !empty($arConf['cachePrefix']) ? $arConf['cachePrefix'] : 'full_' . (int) $_REQUEST['newsId'],
-	'newsId' => ((int) $_REQUEST['newsId'] > 0) ? (int) $_REQUEST['newsId'] : '0',
+$afsCfg = array(
+	'template' => !empty($_GET['template']) ? $_GET['template'] : 'ajax/fullstory',
+	'cachePrefix' => !empty($arConf['cachePrefix']) ? $arConf['cachePrefix'] '_' . (int) $_GET['newsId'] : 'full_' . (int) $_GET['newsId'],
+	'newsId' => ((int) $_GET['newsId'] > 0) ? (int) $_GET['newsId'] : '0',
 	'fields' => $queryFields,
 );
 
-if ($fsCfg['newsId'] < 1) {
+if ($afsCfg['newsId'] < 1) {
 	die('error');
 }
 
 // Формируем имя кеша
-$cacheName = md5(implode('_', $fsCfg)) . $config['skin'];
-$fs = false;
+$cacheName = md5(implode('_', $afsCfg)) . $config['skin'];
+$afs = false;
 // Пытаемся получить даные из кеша
-$fs = dle_cache($fsCfg['cachePrefix'], $cacheName, true);
-if (!$fs) {
+$afs = dle_cache($afsCfg['cachePrefix'], $cacheName, true);
+if (!$afs) {
 	// Если ничего нет - работаем
-	if (file_exists($template_dir . '/' . $fsCfg['template'] . '.tpl')) {
+	if (file_exists($template_dir . '/' . $afsCfg['template'] . '.tpl')) {
 		// Если файл шаблона есть - работаем
 
 		// По умолчанию доступ к новости разрешен
@@ -218,7 +218,7 @@ if (!$fs) {
 		$allow_list = explode(',', $user_group[$member_id['user_group']]['allow_cats']);
 
 		// Получаем новость
-		$query = "SELECT " . $fsCfg['fields'] . " FROM " . PREFIX . "_post LEFT JOIN " . PREFIX . "_post_extras ON (" . PREFIX . "_post.id=" . PREFIX . "_post_extras.news_id) WHERE id = " . $fsCfg['newsId'];
+		$query = "SELECT " . $afsCfg['fields'] . " FROM " . PREFIX . "_post LEFT JOIN " . PREFIX . "_post_extras ON (" . PREFIX . "_post.id=" . PREFIX . "_post_extras.news_id) WHERE id = " . $afsCfg['newsId'];
 
 		$row = $db->super_query($query);
 
@@ -311,7 +311,7 @@ if (!$fs) {
 			define('TEMPLATE_DIR', $tpl->dir);
 
 			// Подгружаем шаблон
-			$tpl->load_template($fsCfg['template'] . '.tpl');
+			$tpl->load_template($afsCfg['template'] . '.tpl');
 
 			// Определяем IP
 			$_IP = get_ip();
@@ -825,50 +825,50 @@ if (!$fs) {
 
 			$category_id = $row['category'];
 
-			$tpl->compile('fs');
+			$tpl->compile('afs');
 
-			$tpl->result['fs'] = preg_replace_callback("#\\[declination=(\d+)\\](.+?)\\[/declination\\]#is", "declination", $tpl->result['fs']);
+			$tpl->result['afs'] = preg_replace_callback("#\\[declination=(\d+)\\](.+?)\\[/declination\\]#is", "declination", $tpl->result['afs']);
 
 			if ($user_group[$member_id['user_group']]['allow_hide']) {
-				$tpl->result['fs'] = str_ireplace("[hide]", "", str_ireplace("[/hide]", "", $tpl->result['fs']));
+				$tpl->result['afs'] = str_ireplace("[hide]", "", str_ireplace("[/hide]", "", $tpl->result['afs']));
 			} else {
-				$tpl->result['fs'] = preg_replace("#\[hide\](.+?)\[/hide\]#ims", "<div class=\"quote\">" . $lang['news_regus'] . "</div>", $tpl->result['fs']);
+				$tpl->result['afs'] = preg_replace("#\[hide\](.+?)\[/hide\]#ims", "<div class=\"quote\">" . $lang['news_regus'] . "</div>", $tpl->result['afs']);
 			}
 
-			$tpl->result['fs'] = preg_replace("'\\[banner_(.*?)\\](.*?)\\[/banner_(.*?)\\]'si", '', $tpl->result['fs']);
+			$tpl->result['afs'] = preg_replace("'\\[banner_(.*?)\\](.*?)\\[/banner_(.*?)\\]'si", '', $tpl->result['afs']);
 
-			$tpl->result['fs'] = str_ireplace('{THEME}', $config['http_home_url'] . 'templates/' . $config['skin'], $tpl->result['fs']);
+			$tpl->result['afs'] = str_ireplace('{THEME}', $config['http_home_url'] . 'templates/' . $config['skin'], $tpl->result['afs']);
 
 			$news_id = $row['id'];
 
 			$tpl->clear();
 
 			if ($config['files_allow'] AND $config['files_allow'] != 'no') {
-				if (strpos($tpl->result['fs'], "[attachment=") !== false) {
-					$tpl->result['fs'] = show_attach($tpl->result['fs'], $news_id);
+				if (strpos($tpl->result['afs'], "[attachment=") !== false) {
+					$tpl->result['afs'] = show_attach($tpl->result['afs'], $news_id);
 				}
 			}
 
-			$fs = $tpl->result['fs'];
+			$afs = $tpl->result['afs'];
 
-			create_cache($fsCfg['cachePrefix'], $fs, $cacheName, true);
+			create_cache($afsCfg['cachePrefix'], $afs, $cacheName, true);
 		}// $row['id'] AND $perm
 
 		// Если доступ есть, но id новости не существует - скажем об этом.
 		if (!$row['id'] AND $perm) {
-			$fs = '<div class="fs-error fs-news-error"><b>Ошибка.</b> Статья не существует или удалена.</div>';
+			$afs = '<div class="afs-error afs-news-error"><b>Ошибка.</b> Статья не существует или удалена.</div>';
 		}
 
 		unset($row);
 
 		if (!$perm) {
-			$fs = '<div class="fs-error fs-perm-error"><b>' . $user_group[$member_id['user_group']]['group_name'] . '</b> не имеют доступа для просмотра статей из данного раздела.</div>';
+			$afs = '<div class="afs-error afs-perm-error"><b>' . $user_group[$member_id['user_group']]['group_name'] . '</b> не имеют доступа для просмотра статей из данного раздела.</div>';
 		}
 
 	} else {
 		// Если файла шаблона нет - скажем об этом на понятном языке.
-		$fs = '<div class="fs-error fs-tpl-error">
-			<b>Ошибка.</b> Отсутствует файл шаблона: /templates/' . $config['skin'] . '/' . $fsCfg['template'] . '.tpl
+		$afs = '<div class="afs-error afs-tpl-error">
+			<b>Ошибка.</b> Отсутствует файл шаблона: /templates/' . $config['skin'] . '/' . $afsCfg['template'] . '.tpl
 		</div>';
 	}
 }
@@ -878,7 +878,7 @@ $seconds = 86400; // 1 день для кеша в браузере
 // Определяем дату создания кеша, при использовании файлового кеша
 // @TODO: наладить Expires при работе с мемкешем.
 $_end_file = ($is_logged) ? '_' . $member_id['user_group'] : '_0';
-$filedate = ENGINE_DIR . '/cache/' . $fsCfg['cachePrefix'] . '_' . md5($cacheName) . $_end_file . '.tmp';
+$filedate = ENGINE_DIR . '/cache/' . $afsCfg['cachePrefix'] . '_' . md5($cacheName) . $_end_file . '.tmp';
 
 header('Content-Type: text/html; charset=' . $config['charset']);
 header('Cache-Control: public, max-age=' . $seconds);
@@ -901,4 +901,4 @@ if (!file_exists($filedate)) {
 }
 
 // Выводим результат
-echo $fs;
+echo $afs;
