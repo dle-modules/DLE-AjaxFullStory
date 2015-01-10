@@ -9,7 +9,7 @@ twitter: https://twitter.com/pafnuty_name
 google+: http://gplus.to/pafnuty
 email:   pafnuty10@gmail.com
 -----------------------------------------------------------------------------
-Версия: 1.2.2 от 10.01.2015
+Версия: 1.2.3 от 11.01.2015
 =============================================================================
  */
 
@@ -38,8 +38,8 @@ require_once ENGINE_DIR . '/classes/mysql.php';
 require_once ENGINE_DIR . '/data/dbconfig.php';
 require_once ENGINE_DIR . '/modules/functions.php';
 
-if ( $config['version_id'] > 10.2 ) {
-	date_default_timezone_set ( $config['date_adjust'] );
+if ($config['version_id'] > 10.2) {
+	date_default_timezone_set($config['date_adjust']);
 	$_TIME = time();
 } else {
 	$_TIME = time() + ($config['date_adjust'] * 60);
@@ -80,6 +80,10 @@ if ($config['version_id'] > 9.6) {
 $member_id = array();
 
 require_once ENGINE_DIR . '/modules/sitelogin.php';
+
+if (!$is_logged) {
+	$member_id['user_group'] = 5;
+}
 
 $user_group = get_vars("usergroup");
 if (!$user_group) {
@@ -277,7 +281,7 @@ if (!$afs) {
 
 				$my_cat[] = $cat_info[$cat_list[0]]['name'];
 
-				$my_cat_link = ($config['version_id'] > 10.1) ? get_categories($cat_list[0], $config['category_separator']) : get_categories($cat_list[0]);;
+				$my_cat_link = ($config['version_id'] > 10.1) ? get_categories($cat_list[0], $config['category_separator']) : get_categories($cat_list[0]);
 
 			} else {
 
