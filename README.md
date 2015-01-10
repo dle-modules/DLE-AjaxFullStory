@@ -1,4 +1,4 @@
-# { ajax-full-story } DLE
+# {AJAX FULL-STORY} DLE
 Бесплатный модуль для загрузки полной новости в DLE средствами AJAX
 
 ## Требования
@@ -101,7 +101,7 @@ $(document).on('click', '[data-afs-id]', function () {
 - Документация по модулю находится на [этой странице](https://github.com/pafnuty/ajax-full-story-DLE/blob/master/DOCUMENTATION.md)
 
 ## Контакты
-URL:     http://pafnuty.name/
-twitter: https://twitter.com/pafnuty_name
-google+: http://gplus.to/pafnuty
-email:   pafnuty10@gmail.com
+- URL:     http://pafnuty.name/
+- twitter: https://twitter.com/pafnuty_name
+- google+: http://gplus.to/pafnuty
+- email:   pafnuty10@gmail.com
