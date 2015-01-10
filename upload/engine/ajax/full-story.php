@@ -9,7 +9,7 @@ twitter: https://twitter.com/pafnuty_name
 google+: http://gplus.to/pafnuty
 email:   pafnuty10@gmail.com
 -----------------------------------------------------------------------------
-Версия: 1.2.1 от 10.01.2015
+Версия: 1.2.2 от 10.01.2015
 =============================================================================
  */
 
@@ -360,16 +360,16 @@ if (!$afs) {
 					||
 					($config['version_id'] >= 9.6 AND ($config['seo_type'] == 1 || $config['seo_type'] == 2))
 				) {
-					if (intval($data['category']) AND $config['seo_type'] == 2) {
-						$full_link = $config['http_home_url'] . get_url(intval($data['category'])) . '/' . $data['id'] . '-' . $data['alt_name'] . '.html';
+					if (intval($row['category']) AND $config['seo_type'] == 2) {
+						$full_link = $config['http_home_url'] . get_url(intval($row['category'])) . '/' . $row['id'] . '-' . $row['alt_name'] . '.html';
 					} else {
-						$full_link = $config['http_home_url'] . $data['id'] . '-' . $data['alt_name'] . '.html';
+						$full_link = $config['http_home_url'] . $row['id'] . '-' . $row['alt_name'] . '.html';
 					}
 				} else {
-					$full_link = $config['http_home_url'] . date('Y/m/d/', $data['date']) . $data['alt_name'] . '.html';
+					$full_link = $config['http_home_url'] . date('Y/m/d/', $row['date']) . $row['alt_name'] . '.html';
 				}
 			} else {
-				$full_link = $config['http_home_url'] . 'index.php?newsid=' . $data['id'];
+				$full_link = $config['http_home_url'] . 'index.php?newsid=' . $row['id'];
 			}
 
 			$row['title'] = stripslashes($row['title']);
