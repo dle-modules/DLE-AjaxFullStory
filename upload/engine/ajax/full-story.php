@@ -9,7 +9,7 @@ twitter: https://twitter.com/pafnuty_name
 google+: http://gplus.to/pafnuty
 email:   pafnuty10@gmail.com
 -----------------------------------------------------------------------------
-Версия: 1.2.3 от 11.01.2015
+Версия: 1.2.4 от 14.01.2015
 =============================================================================
  */
 
@@ -752,7 +752,7 @@ if (!$afs) {
 				$tpl->set($matches[0], $row['full_story']);
 
 			}
-
+			$xfields = xfieldsload();
 			if (strpos($tpl->copy_template, "[xfvalue_") !== false OR strpos($tpl->copy_template, "[xfgiven_") !== false) {
 
 				$xfieldsdata = xfieldsdataload($row['xfields']);
