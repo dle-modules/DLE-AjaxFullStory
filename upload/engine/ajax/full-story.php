@@ -24,6 +24,9 @@ define('ROOT_DIR', substr(dirname(__FILE__), 0, -12));
 
 define('ENGINE_DIR', ROOT_DIR . '/engine');
 
+// фикс работы модуля для DLE 13 https://sandev.pro/blog/134-obnovilsya-do-dle-13-i-perestal-rabotat-modul-kak-pochinit.html
+include_once ENGINE_DIR . '/classes/plugins.class.php';
+
 include ENGINE_DIR . '/data/config.php';
 
 if ($config['http_home_url'] == "") {
