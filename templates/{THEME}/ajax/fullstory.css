@@ -1,0 +1,28 @@
+/* Стиль модального окна */
+.afs-modal .mfp-content .fullstory {
+	margin: 20px auto;
+	max-width: 800px;
+}
+
+.afs-error {
+	/* Общий стиль для всех ошибок */
+	padding: 20px;
+	background: #fff;
+	color: #424242;
+}
+
+.afs-news-error {
+	/* Стиль ошибки, если новость не найдена */
+	background: #eceff1;
+}
+
+.afs-tpl-error {
+	/* Стиль ошибки, если не найден шаблон */
+	color: #b71c1c;
+}
+
+.afs-perm-error {
+	/* Стиль ошибки, если не достаточно прав для просмотра полной новости */
+	background: #e65100;
+	color: #f5f5f5;
+}
