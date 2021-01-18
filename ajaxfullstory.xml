@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dleplugin>
+	<name>AjaxFullStory</name>
+	<description>DLE-AjaxFullStory - модуль для загрузки полной новости в DLE средствами AJAX</description>
+	<icon></icon>
+	<version>2.0.0</version>
+	<dleversion>14</dleversion>
+	<versioncompare>greater</versioncompare>
+	<upgradeurl>https://updates.pafnuty.name/check-afs.php</upgradeurl>
+	<filedelete>0</filedelete>
+	<needplugin></needplugin>
+	<mnotice>1</mnotice>
+	<mysqlinstall><![CDATA[]]></mysqlinstall>
+	<mysqlupgrade><![CDATA[]]></mysqlupgrade>
+	<mysqlenable><![CDATA[]]></mysqlenable>
+	<mysqldisable><![CDATA[]]></mysqldisable>
+	<mysqldelete><![CDATA[]]></mysqldelete>
+	<phpinstall><![CDATA[]]></phpinstall>
+	<phpupgrade><![CDATA[]]></phpupgrade>
+	<phpenable><![CDATA[]]></phpenable>
+	<phpdisable><![CDATA[]]></phpdisable>
+	<phpdelete><![CDATA[]]></phpdelete>
+	<notice><![CDATA[<a href="https://github.com/dle-modules/DLE-AjaxFullStory/blob/master/README.md" target="_blank">Настройка</a>
+<a href="https://github.com/dle-modules/DLE-AjaxFullStory/releases/latest" target="_blank">Release notes</a>]]></notice>
+</dleplugin>
